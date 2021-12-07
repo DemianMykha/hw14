@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HW</title>
+</head>
+<body>
+<div class="firstTask">
+    <h2>Word Count:<span id="countWord"> 0</span></h2>
+    <h2>Space Count:<span id="countSpace"> 0</span></h2>
+    <h2>Symbol Count:<span id="countSymb"> 0</span></h2>
+    <h2>Split Count:<span id="countSplit"> 0</span></h2>
+    <textarea id="countManipulate" rows="10"></textarea>
+    <h2 ><span id="percentArray">%=</span></h2>
+</div>
+<script>
+
+    const inputVal   = document.getElementById('countManipulate');
+    let countWord    = document.getElementById('countWord');
+    let countSpace   = document.getElementById('countSpace');
+    let countSymb    = document.getElementById('countSymb');
+    let countSplit   = document.getElementById('countSplit');
+    let valPercent   = document.getElementById('percentArray');
+    inputVal.addEventListener('keyup', function (e) {
+        wordCounter(e.target.value);
+        wordCounterSplit(e.target.value);
+        symbolCounter(e.target.value);
+        percentVal(e.target.value);
+    });
+
+    function wordCounter(task1) {
+        task1 = inputVal.value.split(" ");
+        let wordCount = 0;
+        for (let i = 0; i < task1.length; i++) {
+            if (task1[i] !== " ") {
+                wordCount++;
+            }
+        }
+        countWord.innerText = wordCount;
+    }
+
+    function wordCounterSplit(task2) {
+        task2 = inputVal.value;
+        let wordCountSplit = 0;
+        for (let i = 0; i <= task2.length; i++) {
+            if (task2[i] === ' ') {
+                wordCountSplit++;
+            }
+        }
+        countSpace.innerText = wordCountSplit;
+    }
+    function symbolCounter(task3) {
+        task3 = inputVal.value;
+        let symbolCountSplit = 0;
+        for (let i = 0; i <= task3.length; i++) {
+            if (task3[i] !== '') {
+                symbolCountSplit++;
+            }
+        }
+        countSymb.innerText = symbolCountSplit;
+        countSplit.innerText = task3.split(" ").join("").length;
+    }
+    function percentVal(count) {
+        count = inputVal.value.split('');
+        const totalItems = count.length;
+        const uniqueItems = [...new Set(count)]
+        uniqueItems.forEach(currElem => {
+            const numItems = count.filter(elem => elem === currElem)
+           valPercent.innerHTML = `Значення ${currElem} повторюється - ${numItems.length} разів та становить - ${numItems.length * 100 / totalItems}%`
+        });
+        
+    }
+</script>
+</body>
+</html>
